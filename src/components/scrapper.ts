@@ -1,4 +1,4 @@
-import Hero from '@ulixee/hero'
+import Hero, { ISuperNode } from '@ulixee/hero'
 import Server from '@ulixee/server'
 import { getRedemptionHeader } from "privacy-pass-redeemer"
 import PrivacyPassToken from '../misc/token.js'
@@ -61,6 +61,12 @@ export default class Hero_Scrapper {
 
             await this._server.close()
         }
+    }
+
+    protected async $restart(url: string) {
+        await this.$cleanup()
+        await this.$setup()
+        await this.$bypass(url)
     }
 
     public async exec() {
