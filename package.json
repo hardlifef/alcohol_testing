@@ -21,11 +21,13 @@
   },
   "homepage": "https://github.com/hardlifef/alcohol_testing#readme",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/mssql": "^8.1.2",
     "@types/node": "^18.11.18",
     "@types/puppeteer": "^7.0.4",
     "@ulixee/hero": "^2.0.0-alpha.18",
     "@ulixee/server": "^2.0.0-alpha.12",
+    "dotenv": "^16.0.3",
     "mssql": "^9.1.1",
     "privacy-pass-redeemer": "^1.0.2",
     "puppeteer": "^19.5.2",

@@ -1,8 +1,7 @@
 import * as sql from 'mssql';
 import { product, SQLconfig } from '../types';
 
-
-class MSSQL {
+export default class MSSQL {
     private sql: any;
     private config: SQLconfig;
 
@@ -33,17 +32,3 @@ class MSSQL {
         }
     }
 }
-
-const config: SQLconfig = {
-    user: 'your-username',
-    password: 'your-password',
-    server: 'your-server-name',
-    database: 'your-database-name',
-    options: {
-        encrypt: true
-    }
-}
-
-const database = new MSSQL(config);
-
-database.insertData('your-table-name', [])
