@@ -1,3 +1,4 @@
+//@ts-ignore
 import * as sql from 'mssql';
 import { product, SQLconfig } from '../types';
 

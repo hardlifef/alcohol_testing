@@ -3,10 +3,12 @@ import { product } from "../types"
 
 export default class SaveHandler {
 
-    public static To_JSON(Data: product[]) {
+    public static To_JSON(Data: any[]) {
         console.log(`[+] Saving to json file ...`)
         try {
-            fs.writeFileSync('../output/test.json', JSON.stringify(Data))
+            let t: product[] = JSON.parse(fs.readFileSync('../output/test.json').toString())
+            Data.forEach((item) => t.push(item))
+            fs.writeFileSync('../output/test.json', JSON.stringify(t))
             console.log(`[+] Saving Succsefull...`)
 
         } catch (error) {
@@ -16,4 +18,3 @@ export default class SaveHandler {
 
     }
 }
-

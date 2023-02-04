@@ -6,7 +6,7 @@ import { product } from '../types/index.js'
 
 export default class Hero_Scrapper {
 
-    public static HERO_PORT = 6400
+    public static HERO_PORT = 6450
 
 
     protected $payload: product[]
