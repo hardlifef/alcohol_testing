@@ -26,7 +26,6 @@ export default class Hero_Scrapper {
 
     protected async $bypass(url: string) {
         let token = PrivacyPassToken.getToken()
-        console.log(token)
         console.log("[+] Attempting To bypass captcha ....");
         await this.$client!.goto(url);
         await this.$client!.fetch(url, {

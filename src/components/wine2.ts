@@ -90,12 +90,19 @@ export default class win2 extends Hero_Scrapper {
 
                 let ProductDetails = (await content.innerText).split('\n')
 
-                console.log(JSON.stringify(ProductDetails))
-
                 for (let i = 0; i < ProductDetails.length; i += 2) {
-                    let keye: string = ProductDetails[i].replace(/\s+/g, "_")
-                    Product[`${keye}`] = ProductDetails[i + 1]
-                    //                    Product[ProductDetails[i]].replace(/\s+/g, "_") = ProductDetails[i + 1];
+                    let key = ProductDetails[i].replace(/\s+/g, "_");
+                    let value = ProductDetails[i + 1];
+                    if (value !== undefined) {
+                        if (value.endsWith(',')) {
+                            value = value.slice(0, -1);
+
+                            value = ProductDetails[i + 1] + `${ProductDetails[i + 2]}`
+                            i += 1
+                        }
+                        Product[key] = value;
+                    }
+
                 }
 
                 TODO: // This needs to check if there is a value of null and will try again if fails again it will return null non the less 

@@ -2,7 +2,8 @@ import Hero_Scrapper from "./scrapper.js";
 import fs from "node:fs"
 
 
-let url = 'https://shopredspirits.com/shop?product-id=5edfcbdb8baad42ff9a54890&option-id=0c15fe7067a25677d0de6724dd62212c1ca0c6b84e5f8f3ae88e4dd89fd1e655'
+let url = 'https://shopredspirits.com/shop?product-id=61928ca41691ac0ff4bd38c8&option-id=50cc6bcc5f177363ef8f459aaff1e27ff95bfd79cae36f63b294d96d18d8d540'
+
 export default class WIN3 extends Hero_Scrapper {
     protected async $extract() {
         let Product: any = {}
@@ -24,18 +25,35 @@ export default class WIN3 extends Hero_Scrapper {
         Product["ratingValue"] = t.aggregateRating.ratingValue
         Product["revieCount"] = t.aggregateRating.reviewCount
 
-        let ProductDetails = (await content.innerText).trim().split('\n')
 
-        console.log((await content.innerText))
-        console.log(JSON.stringify(ProductDetails))
+        let ProductDetails = (await content.innerText).split('\n')
 
+
+        console.log(ProductDetails)
+
+        for (let i = 0; i < ProductDetails.length; i += 2) {
+            let key = ProductDetails[i].replace(/\s+/g, "_");
+            let value = ProductDetails[i + 1];
+            let sweep = true
+            if (value !== undefined) {
+                while (sweep) {
+                    if (value.endsWith(',')) {
+                        value = value.slice(0, -1)
+
+                    }
+                }
+            }
+            Product[key] = value;
+        }
+
+        console.log(Product)
+    }
+
+}
+/* 
         for (let i = 0; i < ProductDetails.length; i += 2) {
             let key = ProductDetails[i]
             let value = ProductDetails[i + 1]
             Product[ProductDetails[i]] = ProductDetails[i + 1];
-        }
-        console.log(Product)
+        } */
 
-
-    }
-}
