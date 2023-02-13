@@ -39,6 +39,7 @@ export default class Product_Scraper extends Hero_Scrapper {
                     let t = JSON.parse(await this.$client!.document.querySelector('#product-metadata').innerText)
 
                     let content = this.$client!.xpathSelector('/html/body/main/div/div/article/ch-elements.product.page/div/div[1]/div[3]/div[2]/div[6]/div[2]');
+
                     Product["name"] = t.name ? t.name : null
                     Product["url"] = t.url ? t.url : null
                     Product["image"] = t.image ? t.image : null
@@ -47,25 +48,28 @@ export default class Product_Scraper extends Hero_Scrapper {
                     Product["PhoneNumber"] = t.offers.seller.telephone ? t.offers.seller.telephone : null
                     Product["price"] = t.offers.price ? t.offers.price : null
                     Product["priceCurrency"] = t.offers.priceCurrency ? t.offers.priceCurrency : null
-                    Product["ratingValue"] = t.aggregateRating.ratingValue ? t.aggregateRating.ratingValue : null
-                    Product["revieCount"] = t.aggregateRating.reviewCount ? t.aggregateRating.reviewCount : null
+                    Product["ratingValue"] = t.aggregateRating ? t.aggregateRating.ratingValue : null
+                    /*  Product["revieCount"] = t.aggregateRating ? t.aggregateRating.reviewCount : null */
 
-                    let ProductDetails = (await content.innerText).split('\n')
+                    //TODO: need to add an error Handling Here For the Inner.text
+                    let ProductDetails = await content.$exists ? (await content.innerText).split('\n') : null
 
-                    for (let i = 0; i < ProductDetails.length; i += 2) {
-                        let key = ProductDetails[i].replace(/\s+/g, "_");
-                        let value = ProductDetails[i + 1];
-                        if (value !== undefined) {
-                            if (value.endsWith(',')) {
-                                value = value.slice(0, -1);
+                    if (ProductDetails !== null) {
+                        for (let i = 0; i < ProductDetails.length; i += 2) {
+                            let key = ProductDetails[i].replace(/\s+/g, "_");
+                            let value = ProductDetails[i + 1];
+                            if (value !== undefined) {
+                                if (value.endsWith(',')) {
+                                    value = value.slice(0, -1);
 
-                                value = ProductDetails[i + 1] + `${ProductDetails[i + 2]}`
-                                i += 1
+                                    value = ProductDetails[i + 1] + `${ProductDetails[i + 2]}`
+                                    i += 1
+                                }
+                                Product[key] = value;
                             }
-                            Product[key] = value;
                         }
-
                     }
+
                     console.log(Product)
                     this.$payload.push(Product)
                     Attempts = 99

@@ -15,8 +15,8 @@ export default class Handler {
      */
     private static splitArrayAt200(arr: string[]) {
         let result = [];
-        for (let i = 0; i < arr.length; i += 100) {
-            result.push(arr.slice(i, i + 100));
+        for (let i = 0; i < arr.length; i += 10) {
+            result.push(arr.slice(i, i + 10));
         }
         return result;
     }
