@@ -4,15 +4,18 @@ import Logger from "../../misc/logger.js"
 import Product_Scraper from "../productScraper.js";
 import SaveHandler from "../../misc/save_handler.js";
 
+
+
 export default class Handler {
+
     /**
      * @TODO_0 : @DONE needs to be able to lunch the script TO collect all the Links One By One and save them in the file
      * @TODO_1 : @DONE needs to read a file 
      * @TODO_2 : @DONE needs to split the file on the first 200 Link
      * @TODO_3 : @DONE needs to be able to lunch the Product Scraper 
-     * @TODO_4 : needs to be able to save the JSON file appending 
-     * @TODO_5 : needs to be able to save to the DATABASE 
+     * @TODO_4 : @DONE needs to be able to save the JSON file appending 
      */
+
     private static splitArrayAt200(arr: string[]) {
         let result = [];
         for (let i = 0; i < arr.length; i += 10) {
@@ -68,7 +71,8 @@ export default class Handler {
                 fs.writeFileSync("../assets/Link.txt", st.join('\n'))
                 SaveHandler.To_JSON(Products)
 
-                // need to save to DB 
+
+
             }
 
 

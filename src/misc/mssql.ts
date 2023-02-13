@@ -1,4 +1,3 @@
-//@ts-ignore
 import * as sql from 'mssql';
 import { product, SQLconfig } from '../types';
 
@@ -11,7 +10,7 @@ export default class MSSQL {
         this.sql = require('mssql');
     }
 
-    async insertData(tableName: string, data: product[]) {
+    async insertData(tableName: string, data: any[]) {
         try {
             await this.sql.connect(this.config);
             let columns: (keyof product)[] = Object.keys(data[0]) as (keyof product)[];

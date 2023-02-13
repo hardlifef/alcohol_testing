@@ -59,7 +59,5 @@ export default class Cuts extends Hero_Scrapper {
         }
         return
     }
-
-
 }
 

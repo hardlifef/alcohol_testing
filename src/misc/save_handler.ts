@@ -6,9 +6,9 @@ export default class SaveHandler {
     public static To_JSON(Data: any[]) {
         console.log(`[+] Saving to json file ...`)
         try {
-            let t: product[] = JSON.parse(fs.readFileSync('../output/test.json').toString())
+            let t: product[] = JSON.parse(fs.readFileSync('../output/products.json').toString())
             Data.forEach((item) => t.push(item))
-            fs.writeFileSync('../output/test.json', JSON.stringify(t))
+            fs.writeFileSync('../output/products.json', JSON.stringify(t))
             console.log(`[+] Saving Succsefull...`)
 
         } catch (error) {

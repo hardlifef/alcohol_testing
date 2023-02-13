@@ -6,7 +6,7 @@ import Logger from "../misc/logger.js";
 
 export default class Product_Scraper extends Hero_Scrapper {
     private Links: string[]
-    private Container: any[]
+
     #logger: Logger
 
     constructor(Links: string[], BachNumber: string) {
@@ -14,7 +14,6 @@ export default class Product_Scraper extends Hero_Scrapper {
 
         this.Links = Links
 
-        this.Container = []
 
         this.#logger = new Logger(BachNumber, "Product_Scrapper")
 
@@ -49,9 +48,7 @@ export default class Product_Scraper extends Hero_Scrapper {
                     Product["price"] = t.offers.price ? t.offers.price : null
                     Product["priceCurrency"] = t.offers.priceCurrency ? t.offers.priceCurrency : null
                     Product["ratingValue"] = t.aggregateRating ? t.aggregateRating.ratingValue : null
-                    /*  Product["revieCount"] = t.aggregateRating ? t.aggregateRating.reviewCount : null */
 
-                    //TODO: need to add an error Handling Here For the Inner.text
                     let ProductDetails = await content.$exists ? (await content.innerText).split('\n') : null
 
                     if (ProductDetails !== null) {
